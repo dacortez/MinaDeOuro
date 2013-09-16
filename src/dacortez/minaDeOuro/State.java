@@ -70,7 +70,7 @@ public class State {
 		if (x < size - 1 && mine[y][x + 1] != '1') {
 			State state = new State(mine);
 			state.setPosition(x + 1, y);
-			list.add(new ActionState(Actions.Right, state));
+			list.add(new ActionState(Action.Right, state));
 		}
 	}
 
@@ -78,7 +78,7 @@ public class State {
 		if (x > 0 && mine[y][x - 1] != '1') {
 			State state = new State(mine);
 			state.setPosition(x - 1, y);
-			list.add(new ActionState(Actions.Left, state));
+			list.add(new ActionState(Action.Left, state));
 		}
 	}
 
@@ -86,7 +86,7 @@ public class State {
 		if (y > 0 && mine[y - 1][x] != '1') {
 			State state = new State(mine);
 			state.setPosition(x, y - 1);
-			list.add(new ActionState(Actions.Up, state));
+			list.add(new ActionState(Action.Up, state));
 		}
 	}
 
@@ -94,7 +94,7 @@ public class State {
 		if (y < size - 1 && mine[y + 1][x] != '1') {
 			State state = new State(mine);
 			state.setPosition(x, y + 1);
-			list.add(new ActionState(Actions.Down, state));
+			list.add(new ActionState(Action.Down, state));
 		}
 	}
 	
@@ -103,7 +103,7 @@ public class State {
 			State state = new State(mine);
 			state.setContent(x, y, '0');
 			state.setPosition(x, y);
-			list.add(new ActionState(Actions.Pick, state));
+			list.add(new ActionState(Action.Pick, state));
 		}
 	}
 	

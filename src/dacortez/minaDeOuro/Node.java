@@ -13,7 +13,7 @@ import java.util.List;
 public class Node {
 	private State state;
 	private Node parentNode;
-	private Actions action;
+	private Action action;
 	private int pathCost;
 	private int depth;
 	
@@ -33,11 +33,11 @@ public class Node {
 		this.parentNode = parentNode;
 	}
 	
-	public Actions getAction() {
+	public Action getAction() {
 		return action;
 	}
 	
-	public void setAction(Actions action) {
+	public void setAction(Action action) {
 		this.action = action;
 	}
 	
@@ -71,8 +71,8 @@ public class Node {
 		return list;
 	}
 	
-	private int stepCost(Actions action) {
-		if (action == Actions.Pick)
+	private int stepCost(Action action) {
+		if (action == Action.Pick)
 			return -4 * State.getSize() ;
 		return 1;
 	}

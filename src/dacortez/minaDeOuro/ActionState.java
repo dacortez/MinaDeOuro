@@ -1,10 +1,10 @@
 package dacortez.minaDeOuro;
 
 public class ActionState {
-	private Actions action;
+	private Action action;
 	private State state;
 	
-	public Actions getAction() {
+	public Action getAction() {
 		return action;
 	}
 
@@ -12,7 +12,7 @@ public class ActionState {
 		return state;
 	}
 
-	public ActionState(Actions action, State state) {
+	public ActionState(Action action, State state) {
 		this.action = action;
 		this.state = state;
 	}
