@@ -31,7 +31,7 @@ public class Main {
 		setEnvironment(args[0]);
 		if (environment != null) {
 			System.out.println(environment);			
-			Agent agent = new BreadthAgent(new Position(0, 0));
+			Agent agent = new LimitedDeapthAgent(new Position(0, 0));
 			Solution solution = agent.search();
 			if (solution != null)
 				System.out.println(solution);
