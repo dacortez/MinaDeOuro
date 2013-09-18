@@ -53,22 +53,19 @@ public class State {
 			if (!goldAlreadyPicked()) {
 				State state = this.clone();
 				state.getPicked().add(position);
-				list.add(new ActionState(Action.Pick, state));
+				list.add(new ActionState(Action.PICK, state));
 			}
 	}
 	
 	private boolean goldAlreadyPicked() {
-		for (Position pickedPosition: picked) 
-			if (pickedPosition.isSame(position))
-				return true;
-		return false;
+		return picked.contains(position);
 	}
 	
 	private void addStateForRightAction(List<ActionState> list) {
 		if (Main.getEnvironment().canMoveRight(position)) {
 			State state = this.clone();
 			state.getPosition().moveRight();
-			list.add(new ActionState(Action.Right, state));
+			list.add(new ActionState(Action.RIGHT, state));
 		}
 	}
 
@@ -76,7 +73,7 @@ public class State {
 		if (Main.getEnvironment().canMoveLeft(position)) {
 			State state = this.clone();
 			state.getPosition().moveLeft();
-			list.add(new ActionState(Action.Left, state));
+			list.add(new ActionState(Action.LEFT, state));
 		}
 	}
 
@@ -84,7 +81,7 @@ public class State {
 		if (Main.getEnvironment().canMoveUp(position)) {
 			State state = this.clone();
 			state.getPosition().moveUp();
-			list.add(new ActionState(Action.Up, state));
+			list.add(new ActionState(Action.UP, state));
 		}
 	}
 
@@ -92,7 +89,7 @@ public class State {
 		if (Main.getEnvironment().canMoveDown(position)) {
 			State state = this.clone();
 			state.getPosition().moveDown();
-			list.add(new ActionState(Action.Down, state));
+			list.add(new ActionState(Action.DOWN, state));
 		}
 	}
 	
@@ -101,14 +98,48 @@ public class State {
 		return new State(position.clone(), new ArrayList<Position>(picked));
 	}
 	
-	public boolean isSame(State other) {
-		if (position.isSame(other.getPosition()))
-			if (getTotalPicked() == other.getTotalPicked())
-				// TODO: implemtar método equals
-				return true;
-		return false;
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((picked == null) ? 0 : picked.hashCode());
+		result = prime * result + ((position == null) ? 0 : position.hashCode());
+		return result;
 	}
-	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof State))
+			return false;
+		State other = (State) obj;
+		if (position == null) {
+			if (other.position != null)
+				return false;
+		} else if (!position.equals(other.position))
+			return false;
+		if (picked == null) {
+			if (other.picked != null)
+				return false;
+		} else if (picked.size() != other.picked.size()) {
+			return false;
+		} else {
+			for (Position gold: picked)
+				if (!other.picked.contains(gold))
+					return false;
+		}
+		return true;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

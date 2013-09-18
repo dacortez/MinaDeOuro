@@ -30,9 +30,13 @@ public class Main {
 		}
 		setEnvironment(args[0]);
 		if (environment != null) {
-			System.out.println(environment);
-			Agent agent = new Agent(SearchMethod.Breadth, new Position(0, 0));
-			agent.searh();
+			System.out.println(environment);			
+			Agent agent = new Agent(SearchMethod.BREADTH, new Position(0, 0));
+			Solution solution = agent.searh();
+			if (solution != null)
+				System.out.println(solution);
+			else
+				System.out.println("Solução não encontrada!");
 		}
 	}
 	
@@ -69,3 +73,31 @@ public class Main {
 		input.close();
 	}
 }
+
+/*
+Position p1 = new Position(1, 10);
+Position p2 = new Position(1, 10);
+Position p3 = new Position(10, 1);
+
+List<Position> l1 = new ArrayList<Position>();
+l1.add(p1); 
+l1.add(p3);
+
+List<Position> l2 = new ArrayList<Position>();
+l2.add(p3); 
+l2.add(p2);
+
+State s1 = new State(p1, l1);
+State s2 = new State(p2, l2);
+State s3 = s2.clone();
+s3.getPosition().moveRight();
+
+System.out.println(l1.contains(p2));
+System.out.println(l2.contains(p1));
+System.out.println(l1.hashCode());
+System.out.println(l2.hashCode());
+System.out.println(p1.hashCode());
+System.out.println(p2.hashCode());
+System.out.println(s1.equals(s2));
+System.out.println(s3.equals(s2));
+*/

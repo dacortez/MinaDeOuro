@@ -1,5 +1,5 @@
 package dacortez.minaDeOuro;
 
 public enum SearchMethod {
-	Breadth, LimitedDepth, AStar
+	BREADTH, LIMITED_DEPTH, A_STAR
 }

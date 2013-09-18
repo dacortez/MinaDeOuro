@@ -72,7 +72,7 @@ public class Node {
 	}
 	
 	private int stepCost(Action action) {
-		if (action == Action.Pick)
+		if (action == Action.PICK)
 			return -4 * Main.getEnvironment().getSize();
 		return 1;
 	}
