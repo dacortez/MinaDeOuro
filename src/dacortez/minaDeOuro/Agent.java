@@ -3,39 +3,22 @@
  */
 package dacortez.minaDeOuro;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
+import java.util.ArrayList;
 
 /**
  * @author dacortez
  *
  */
-public class Agent {
-	private SearchMethod method;
-	private Position startPosition;
-	private Node root;
-	private List<State> closed;
+public abstract class Agent implements AgentInterface {
+	protected Position startPosition;
+	protected List<State> closed;
+	protected Node root;
 	
-	public Agent(SearchMethod method, Position startPosition) {
-		this.method = method;
+	public Agent(Position startPosition) {
 		this.startPosition = startPosition;
 		closed = new ArrayList<State>();
-	}
-	
-	public Solution searh() {
 		setRoot();
-		closed.clear();
-		switch (method) {
-		case A_STAR:
-			return null;
-		case BREADTH:
-			return breadthSearch();
-		case LIMITED_DEPTH:
-			return null;
-		}
-		return null;
 	}
 	
 	private void setRoot() {
@@ -48,24 +31,15 @@ public class Agent {
 		root.setDepth(0);
 	}
 	
-	private Solution breadthSearch() {
-		Queue<Node> queue = new LinkedList<Node>();
-		queue.add(root);
-		while (!queue.isEmpty()) {
-			Node node = queue.remove();
-			if (goalTest(node.getState()))
-				return new Solution(node);
-			if (!closed.contains(node.getState())) {
-				closed.add(node.getState());
-				queue.addAll(node.expand());
-			}
-		}
-		return null;
-	}
-	
-	private boolean goalTest(State state) {
+	protected boolean goalTest(State state) {
 		if (state.getTotalPicked() == Main.getEnvironment().getTotalGold())
 			return (startPosition.equals(state.getPosition()));
 		return false; 
 	}
+	
+	/* (non-Javadoc)
+	 * @see dacortez.minaDeOuro.AgentInterface#search()
+	 */
+	@Override
+	public abstract Solution search();
 }
