@@ -8,13 +8,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-
 /**
  * @author dacortez
  *
  */
 public class Main {
-
+	private static Environment environment;
+	
+	public static Environment getEnvironment() {
+		return environment;
+	}
+	
 	/**
 	 * @param args
 	 */
@@ -24,17 +28,18 @@ public class Main {
 			System.out.println("Tipo de busca: L para largura, P para profundidada, A para A*");
 			return;
 		}
-		Main main = new Main();
-		State initialState = main.getInitialState(args[0]);
-		if (initialState != null) {
-			Agent agent = new Agent(initialState);
-			agent.breadthSearh();
+		setEnvironment(args[0]);
+		if (environment != null) {
+			System.out.println(environment);
+			Agent agent = new Agent(SearchMethod.Breadth, new Position(0, 0));
+			agent.searh();
 		}
 	}
 	
-	private State getInitialState(String inputFile) {
+	private static void setEnvironment(String file) {
 		try	{
-			return tryToGetInitialState(inputFile);
+			tryToSetEnvironment(file);
+			return;
 		}
 		catch (FileNotFoundException ex) {
 			System.err.println("Arquivo de entrada n‹o encontrado.");
@@ -45,25 +50,22 @@ public class Main {
 		catch (Exception ex) {
 			System.err.println("Arquivo de entrada mal formatado.");
 		}
-		return null;
+		environment = null;
 	}
 
-	private State tryToGetInitialState(String inputFile) 
+	private static void tryToSetEnvironment(String file) 
 			throws FileNotFoundException, IOException, Exception {
-		BufferedReader input = new BufferedReader(new FileReader(inputFile));
+		BufferedReader input = new BufferedReader(new FileReader(file));
 		String line = input.readLine();
-		int size = Integer.parseInt(line);
-		State state = new State(size);
-		state.setPosition(0, 0);
-		for (int y = 0; y < size; y++) {
+		short size = Short.parseShort(line);
+		environment = new Environment(size);
+		for (short row = 0; row < size; row++) {
 			line = input.readLine();
-			for (int x = 0; x < size; x++) {
-				char content = line.charAt(x);
-				state.setContent(x, y, content);
+			for (short col = 0; col < size; col++) {
+				char content = line.charAt(col);
+				environment.setMineContent(new Position(row, col), content);
 			}
 		}
 		input.close();
-		return state;
 	}
-
 }

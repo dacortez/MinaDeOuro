@@ -73,7 +73,7 @@ public class Node {
 	
 	private int stepCost(Action action) {
 		if (action == Action.Pick)
-			return -4 * State.getSize() ;
+			return -4 * Main.getEnvironment().getSize();
 		return 1;
 	}
 	
@@ -81,9 +81,9 @@ public class Node {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(state);
-		sb.append("action = " + action + "\n");
-		sb.append("pathCost = " + pathCost + "\n");
-		sb.append("depth = " + depth + "\n");
+		sb.append("action = ").append(action).append('\n');
+		sb.append("pathCost = ").append(pathCost).append('\n');
+		sb.append("depth = ").append(depth).append('\n');
 		return sb.toString();
 	}
 }

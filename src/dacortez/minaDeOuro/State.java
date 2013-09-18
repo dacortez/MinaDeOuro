@@ -11,118 +11,113 @@ import java.util.List;
  *
  */
 public class State {
-	private static int size;
-	private char[][] mine;
-	private int x, y;
-	
-	public static int getSize() {
-		return size;
+	private Position position;
+	private List<Position> picked;
+		
+	public Position getPosition() {
+		return position;
 	}
 	
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
+	public List<Position> getPicked() {
+		return picked;
 	}
 	
-	public State(int size) {
-		State.size = size;
-		mine = new char[size][size];
+	public State(Position position) {
+		this.position = position;
+		this.picked = new ArrayList<Position>();
 	}
 	
-	public State(char mine[][]) {
-		this.mine = new char[size][size];
-		for (int i = 0; i < size; i++)
-			for (int j = 0; j < size; j++)
-				this.mine[i][j] = mine[i][j];
+	public State(Position position, List<Position> picked) {
+		this.position = position;
+		this.picked = picked;
 	}
 	
-	public void setPosition(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
-	
-	public void setContent(int x, int y, char content) {
-		mine[y][x] = content;
+	public int getTotalPicked() {
+		return picked.size();
 	}
 	
 	public List<ActionState> getSuccessors() {
 		List<ActionState> list = new ArrayList<ActionState>();
-		addRight(list);
-		addLeft(list);
-		addUp(list);
-		addDown(list);		
-		addPick(list);
+		addStateForPickAction(list);
+		if (list.size() == 0) {
+			addStateForRightAction(list);
+			addStateForLeftAction(list);
+			addStateForUpAction(list);
+			addStateForDownAction(list);
+		}
 		return list;
 	}
 	
-	private void addRight(List<ActionState> list) {
-		if (x < size - 1 && mine[y][x + 1] != '1') {
-			State state = new State(mine);
-			state.setPosition(x + 1, y);
+	private void addStateForPickAction(List<ActionState> list) {
+		if (Main.getEnvironment().isThereGold(position))
+			if (!goldAlreadyPicked()) {
+				State state = this.clone();
+				state.getPicked().add(position);
+				list.add(new ActionState(Action.Pick, state));
+			}
+	}
+	
+	private boolean goldAlreadyPicked() {
+		for (Position pickedPosition: picked) 
+			if (pickedPosition.isSame(position))
+				return true;
+		return false;
+	}
+	
+	private void addStateForRightAction(List<ActionState> list) {
+		if (Main.getEnvironment().canMoveRight(position)) {
+			State state = this.clone();
+			state.getPosition().moveRight();
 			list.add(new ActionState(Action.Right, state));
 		}
 	}
 
-	private void addLeft(List<ActionState> list) {
-		if (x > 0 && mine[y][x - 1] != '1') {
-			State state = new State(mine);
-			state.setPosition(x - 1, y);
+	private void addStateForLeftAction(List<ActionState> list) {
+		if (Main.getEnvironment().canMoveLeft(position)) {
+			State state = this.clone();
+			state.getPosition().moveLeft();
 			list.add(new ActionState(Action.Left, state));
 		}
 	}
 
-	private void addUp(List<ActionState> list) {
-		if (y > 0 && mine[y - 1][x] != '1') {
-			State state = new State(mine);
-			state.setPosition(x, y - 1);
+	private void addStateForUpAction(List<ActionState> list) {
+		if (Main.getEnvironment().canMoveUp(position)) {
+			State state = this.clone();
+			state.getPosition().moveUp();
 			list.add(new ActionState(Action.Up, state));
 		}
 	}
 
-	private void addDown(List<ActionState> list) {
-		if (y < size - 1 && mine[y + 1][x] != '1') {
-			State state = new State(mine);
-			state.setPosition(x, y + 1);
+	private void addStateForDownAction(List<ActionState> list) {
+		if (Main.getEnvironment().canMoveDown(position)) {
+			State state = this.clone();
+			state.getPosition().moveDown();
 			list.add(new ActionState(Action.Down, state));
 		}
 	}
 	
-	private void addPick(List<ActionState> list) {
-		if (mine[y][x] == '*') {
-			State state = new State(mine);
-			state.setContent(x, y, '0');
-			state.setPosition(x, y);
-			list.add(new ActionState(Action.Pick, state));
-		}
+	@Override
+	public State clone() {
+		return new State(position.clone(), new ArrayList<Position>(picked));
 	}
 	
-	public boolean isThereGold() {
-		for (int i = 0; i < size; i++)
-			for (int j = 0; j < size; j++)
-				if (mine[i][j] == '*')
-					return true;
+	public boolean isSame(State other) {
+		if (position.isSame(other.getPosition()))
+			if (getTotalPicked() == other.getTotalPicked())
+				// TODO: implemtar mŽtodo equals
+				return true;
 		return false;
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("(" + x + ", " + y + ")\n");
-		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++)
-				sb.append(mine[i][j]);
-			sb.append('\n');
+		sb.append(position).append('\n');
+		if (picked.size() > 0) {
+			sb.append("[");
+			for (Position pickedPosition: picked)
+				sb.append(pickedPosition).append(", ");
+			sb.replace(sb.length() - 2, sb.length(), "]\n");
 		}
 		return sb.toString();
 	}
