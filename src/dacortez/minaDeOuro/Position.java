@@ -48,6 +48,10 @@ public class Position {
 		row--;
 	}
 	
+	public int distTo(Position other) {
+		return Math.abs(other.row - row) + Math.abs(other.col - col);
+	}
+	
 	@Override
 	public Position clone() {
 		return new Position(row, col);
@@ -83,7 +87,7 @@ public class Position {
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "(" + row + "," + col + ")";

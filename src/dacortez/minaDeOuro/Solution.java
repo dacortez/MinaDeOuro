@@ -15,6 +15,10 @@ public class Solution {
 		if (finalNode != null)
 			setStack();
 	}
+	
+	protected Solution() {
+	
+	}
 
 	private void setStack() {
 		stack = new Stack<Node>();
@@ -26,13 +30,11 @@ public class Solution {
 	}
 	
 	public int getCost() {
-		return -finalNode.getPathCost();
+		return finalNode.getPathCost();
 	}
 	
 	@Override
 	public String toString() {
-		if (finalNode == null)
-			return "Cutoff";
 		StringBuilder sb = new StringBuilder();
 		sb.append(getCost()).append(" pontos\n");
 		for (int i = stack.size() - 2, j = 1; i >= 0; i--, j++) {

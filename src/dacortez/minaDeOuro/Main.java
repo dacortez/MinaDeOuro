@@ -31,13 +31,17 @@ public class Main {
 		setEnvironment(args[0]);
 		if (environment != null) {
 			System.out.println(environment);			
-			Agent agent = new LimitedDeapthAgent(new Position(0, 0));
+			//Agent agent = new LimitedDeapthAgent(new Position(0, 0));
 			//Agent agent = new BreadthAgent(new Position(0, 0));
+			Agent agent = new AStarAgent(new Position(0, 0));
+			long ti = System.currentTimeMillis();
 			Solution solution = agent.search();
+			long tf = System.currentTimeMillis();
 			if (solution != null)
 				System.out.println(solution);
 			else
 				System.out.println("Solução não encontrada!");
+			System.out.println("Tempo = " + (tf - ti) + " ms");
 		}
 	}
 	

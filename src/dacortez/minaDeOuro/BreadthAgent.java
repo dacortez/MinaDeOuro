@@ -19,19 +19,17 @@ public class BreadthAgent extends Agent {
 	@Override
 	public Solution search() {
 		closed.clear();
-		Solution best = new Solution(root);
 		Queue<Node> queue = new LinkedList<Node>();
 		queue.add(root);
 		while (!queue.isEmpty()) {
 			Node node = queue.remove();
 			if (goalTest(node.getState()))
-				if (-node.getPathCost() > best.getCost())
-					best = new Solution(node); 
+				return new Solution(node); 
 			if (!closed.contains(node.getState())) {
 				closed.add(node.getState());
 				queue.addAll(node.expand());
 			}
 		}
-		return best;
+		return null;
 	}
 }

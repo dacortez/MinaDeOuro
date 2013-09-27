@@ -73,8 +73,8 @@ public class Node {
 	
 	private int stepCost(Action action) {
 		if (action == Action.PICK)
-			return -4 * Main.getEnvironment().getSize();
-		return 1;
+			return 4 * Main.getEnvironment().getSize();
+		return -1;
 	}
 	
 	@Override

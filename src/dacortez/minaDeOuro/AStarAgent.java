@@ -4,6 +4,7 @@
 package dacortez.minaDeOuro;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -41,9 +42,12 @@ public class AStarAgent extends Agent {
 	}
 	
 	private Queue<Node> getPriorityQueue() {
-		Queue<Node> queue = new PriorityQueue<Node>(1000, new Comparator<Node>() {  
+		int size = Main.getEnvironment().getSize();
+		int totalGold = Main.getEnvironment().getTotalGold();
+		int qSize = size * size * totalGold;
+		Queue<Node> queue = new PriorityQueue<Node>(qSize, new Comparator<Node>() {  
             public int compare(Node n1, Node n2) {
-            	return getF(n1) < getF(n2) ? -1 : 1;
+            	return getF(n1) > getF(n2) ? -1 : 1;
             }  
         });
 		return queue;
@@ -54,6 +58,22 @@ public class AStarAgent extends Agent {
 	}
 	
 	private int getH(Node node) {
-		return 1;
+		Position agentPosition = node.getState().getPosition();
+		List<Position> picked = node.getState().getPicked();
+		List<Position> goldPositions = Main.getEnvironment().getGoldPositions();
+		Position nearest = null;
+		int min = 2 * Main.getEnvironment().getSize();
+		for (Position gold: goldPositions)
+			if (!picked.contains(gold)) {
+				int dist = agentPosition.distTo(gold);
+				if (dist < min) {
+					nearest = gold;
+					min = dist;
+				}
+			}
+		if (nearest != null)
+			return -min - nearest.distTo(startPosition) + 4 * Main.getEnvironment().getSize();
+		return -agentPosition.distTo(startPosition);
+		//return 0;
 	}
 }

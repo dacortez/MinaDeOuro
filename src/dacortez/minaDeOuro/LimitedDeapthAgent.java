@@ -8,8 +8,7 @@ package dacortez.minaDeOuro;
  *
  */
 public class LimitedDeapthAgent extends Agent {
-	private static final int MAX_LIMIT = 1000;
-	private Solution best;
+	private static final int MAX_LIMIT = 100;
 	
 	/**
 	 * @param startPosition
@@ -24,20 +23,23 @@ public class LimitedDeapthAgent extends Agent {
 	@Override
 	public Solution search() {
 		closed.clear();
-		best = new Solution(root);
-		recursiveDLS(root, MAX_LIMIT);
-		return best;
+		return recursiveDLS(root, MAX_LIMIT);
 	}
 	
-	private void recursiveDLS(Node node, int limit) {
+	private Solution recursiveDLS(Node node, int limit) {
 		closed.add(node.getState());
-		if (goalTest(node.getState()))
-			if (-node.getPathCost() > best.getCost())
-				best = new Solution(node);
-		if (node.getDepth() == limit)
-			return;
+		boolean cutoffOccured = false;
+		if (goalTest(node.getState())) return new Solution(node);
+		if (node.getDepth() == limit) return new Cutoff();
 		for (Node child: node.expand())
-			if (!closed.contains(child.getState()))
-				recursiveDLS(child, limit);
+			if (!closed.contains(child.getState())) {
+				Solution result = recursiveDLS(child, limit);
+				if (result instanceof Cutoff)
+					cutoffOccured = true;
+				else if (result != null)
+					return result;
+			}
+		if (cutoffOccured) return new Cutoff();
+		return null;
 	}
 }
