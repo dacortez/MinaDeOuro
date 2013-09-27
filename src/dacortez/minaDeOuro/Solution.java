@@ -29,10 +29,6 @@ public class Solution {
 		return -finalNode.getPathCost();
 	}
 	
-	public boolean isCutoff() {
-		return (finalNode == null);
-	}
-	
 	@Override
 	public String toString() {
 		if (finalNode == null)
