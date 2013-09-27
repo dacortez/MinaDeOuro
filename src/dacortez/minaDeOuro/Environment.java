@@ -3,6 +3,9 @@
  */
 package dacortez.minaDeOuro;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author dacortez
  *
@@ -10,7 +13,7 @@ package dacortez.minaDeOuro;
 public class Environment {
 	private short size;
 	private char[][] mine;
-	private int totalGold;
+	private List<Position> goldPositions;
 	
 	public short getSize() {
 		return size;
@@ -20,14 +23,14 @@ public class Environment {
 		return mine;
 	}
 	
-	public int getTotalGold() {
-		return totalGold;
+	public List<Position> getGoldPositions() {
+		return goldPositions;
 	}
 	
 	public Environment(short size) {
 		this.size = size;
 		mine = new char[size][size];
-		totalGold = 0;
+		goldPositions = new ArrayList<Position>();
 	}
 	
 	public void setMineContent(Position position, char content) {
@@ -35,7 +38,11 @@ public class Environment {
 		int col = position.getCol();
 		mine[row][col] = content;
 		if (mine[row][col] == '*')
-			totalGold++;
+			goldPositions.add(position);
+	}
+	
+	public int getTotalGold() {
+		return goldPositions.size();
 	}
 	
 	public boolean canMoveRight(Position position) {

@@ -32,9 +32,7 @@ public abstract class Agent implements AgentInterface {
 	}
 	
 	protected boolean goalTest(State state) {
-		if (state.getTotalPicked() == Main.getEnvironment().getTotalGold())
-			return (startPosition.equals(state.getPosition()));
-		return false; 
+		return startPosition.equals(state.getPosition()); 
 	}
 	
 	/* (non-Javadoc)
