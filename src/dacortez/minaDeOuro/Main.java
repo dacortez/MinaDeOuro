@@ -26,7 +26,6 @@ public class Main {
 	// Variável contendo o mapa da mina.
 	private static Environment environment;
 	
-	
 	/**
 	 * @return O ambiente criado a partir do arquivo de entrada.
 	 */
