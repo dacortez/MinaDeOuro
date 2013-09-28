@@ -1,5 +1,8 @@
 /**
+ * MAC0425 - Inteligência Artificial
+ * EP1 - Mina de Ouro
  * 
+ * Daniel Augusto Cortez - 2960291
  */
 package dacortez.minaDeOuro;
 
@@ -7,35 +10,62 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Representa o estado onde se encontra o agente em sua busca.
+ * O estado é representado pela posição do agente e uma lista
+ * das posições das pepitas de ouro recolhidas.
+ *  
  * @author dacortez
- *
+ * @version 2013.09.26
  */
 public class State {
+	// Posição atual do agente na mina.
 	private Position position;
+	// Posições das pepitas de ouro recolhidas.
 	private List<Position> picked;
 		
+	/**
+	 * @return A posição do agente na mina.
+	 */
 	public Position getPosition() {
 		return position;
 	}
 	
+	/**
+	 * @return A lista das posições das pepitas de ouro recolhidas.
+	 */
 	public List<Position> getPicked() {
 		return picked;
 	}
 	
+	/**.
+	 * @param position A posição do agente na mina.
+	 */
 	public State(Position position) {
 		this.position = position;
 		this.picked = new ArrayList<Position>();
 	}
 	
+	/**
+	 * @param position A posição do agente na mina.
+	 * @param picked A lista das posições das pepitas de ouro recolhidas.
+	 */
 	public State(Position position, List<Position> picked) {
 		this.position = position;
 		this.picked = picked;
 	}
 	
+	/**
+	 * @return O número de pepitas de ouro recolhidas pelo agente no estado.
+	 */
 	public int getTotalPicked() {
 		return picked.size();
 	}
 	
+	/**
+	 * Função sucessora para o estado atual.
+	 * @return Lista de pares (estado, ação) que podem ser gerados a partir
+	 * do estado atual.
+	 */
 	public List<ActionState> getSuccessors() {
 		List<ActionState> list = new ArrayList<ActionState>();
 		addStateForPickAction(list);
@@ -48,6 +78,11 @@ public class State {
 		return list;
 	}
 	
+	/**
+	 * Se for possível, adiciona à lista um novo par (estado, ação) 
+	 * correspondente a ação de pegar ouro a partir do estado atual.
+	 * @param list Lista atual de pares (estado, ação) sendo atualizada.
+	 */
 	private void addStateForPickAction(List<ActionState> list) {
 		if (Main.getEnvironment().isThereGold(position))
 			if (!goldAlreadyPicked()) {
@@ -57,10 +92,20 @@ public class State {
 			}
 	}
 	
+	/**
+	 * Verifica se o agente já pegou o ouro em sua posição atual.
+	 * @return true se a pepita de ouro na posição atual do agente já foi
+	 * coletada, false caso contrário.
+	 */
 	private boolean goldAlreadyPicked() {
 		return picked.contains(position);
 	}
 	
+	/**
+	 * Se for possível, adiciona à lista um novo par (estado, ação) 
+	 * correspondente a ação de mover para direita a partir do estado atual.
+	 * @param list Lista atual de pares (estado, ação) sendo atualizada.
+	 */
 	private void addStateForRightAction(List<ActionState> list) {
 		if (Main.getEnvironment().canMoveRight(position)) {
 			State state = this.clone();
@@ -69,6 +114,11 @@ public class State {
 		}
 	}
 
+	/**
+	 * Se for possível, adiciona à lista um novo par (estado, ação) 
+	 * correspondente a ação de mover para esquerda a partir do estado atual.
+	 * @param list Lista atual de pares (estado, ação) sendo atualizada.
+	 */
 	private void addStateForLeftAction(List<ActionState> list) {
 		if (Main.getEnvironment().canMoveLeft(position)) {
 			State state = this.clone();
@@ -77,6 +127,11 @@ public class State {
 		}
 	}
 
+	/**
+	 * Se for possível, adiciona à lista um novo par (estado, ação) 
+	 * correspondente a ação de mover para cima a partir do estado atual.
+	 * @param list Lista atual de pares (estado, ação) sendo atualizada.
+	 */
 	private void addStateForUpAction(List<ActionState> list) {
 		if (Main.getEnvironment().canMoveUp(position)) {
 			State state = this.clone();
@@ -85,6 +140,11 @@ public class State {
 		}
 	}
 
+	/**
+	 * Se for possível, adiciona à lista um novo par (estado, ação) 
+	 * correspondente a ação de mover para baixo a partir do estado atual.
+	 * @param list Lista atual de pares (estado, ação) sendo atualizada.
+	 */
 	private void addStateForDownAction(List<ActionState> list) {
 		if (Main.getEnvironment().canMoveDown(position)) {
 			State state = this.clone();
@@ -93,6 +153,9 @@ public class State {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#clone()
+	 */
 	@Override
 	public State clone() {
 		return new State(position.clone(), new ArrayList<Position>(picked));
@@ -140,6 +203,9 @@ public class State {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

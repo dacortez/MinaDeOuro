@@ -1,5 +1,8 @@
 /**
+ * MAC0425 - Inteligência Artificial
+ * EP1 - Mina de Ouro
  * 
+ * Daniel Augusto Cortez - 2960291
  */
 package dacortez.minaDeOuro;
 
@@ -9,42 +12,102 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
+ * Cria o objeto Enviroment apropriado a partir do arquivo de entrada e
+ * instância o tipo de agente escolhido. O objeto Environment pode ser 
+ * acessado estaticamente pois é único ao longo da vida do agente. 
+ * Os tipos de agente que podem ser instanciados efetuam busca em 
+ * largura limitada, busca em profundidade, ou busca A*.
+ * 
  * @author dacortez
- *
+ * @version 2013.09.27
  */
 public class Main {
+	// Variável contendo o mapa da mina.
 	private static Environment environment;
 	
+	
+	/**
+	 * @return O ambiente criado a partir do arquivo de entrada.
+	 */
 	public static Environment getEnvironment() {
 		return environment;
 	}
 	
 	/**
-	 * @param args
+	 * Cria o ambiente, instancializa o agente apropriadao e efetua 
+	 * a busca da melhor solução para o problema.
+	 * @param args Argumentos passados na linha de comando. O primeiro 
+	 * parâmetro deve ser o arquivo de entrada com a descrição da mina 
+	 * e o segundo deve ser o tipo do agente, sendo 'L' para largura, 
+	 * 'P' para profundidade e 'A' para A*. 
 	 */
 	public static void main(String[] args) {
-		if (args.length < 2 || !args[1].matches("L|P|A")) {
-			System.out.println("Uso: java Main <arquivo_de_entrada> <tipo_de_busca>");
-			System.out.println("Tipo de busca: L para largura, P para profundidada, A para A*");
-			return;
-		}
-		setEnvironment(args[0]);
-		if (environment != null) {
-			System.out.println(environment);			
-			//Agent agent = new LimitedDeapthAgent(new Position(0, 0));
-			//Agent agent = new BreadthAgent(new Position(0, 0));
-			Agent agent = new AStarAgent(new Position(0, 0));
-			long ti = System.currentTimeMillis();
-			Solution solution = agent.search();
-			long tf = System.currentTimeMillis();
-			if (solution != null)
-				System.out.println(solution);
-			else
-				System.out.println("Solução não encontrada!");
-			System.out.println("Tempo = " + (tf - ti) + " ms");
+		if (correctArgs(args)) {
+			setEnvironment(args[0]);
+			if (environment != null) {
+				System.out.println(environment);
+				Agent agent = getAgent(args[1].charAt(0));
+				if (agent != null)
+					searchAndShowSolution(agent);
+				else
+					System.out.println("Agente não definido.");
+			}
 		}
 	}
 	
+	
+	/**
+	 * Verifica se os argumentos foram passados corretamente.
+	 * @param args Argumentos passados na linha de comando.
+	 * @return true se argumentos passados corretamente, false caso contrário.
+	 */
+	private static boolean correctArgs(String args[]) {
+		if (args.length < 2 || !args[1].matches("L|P|A")) {
+			System.out.println("Uso: java -jar MinaDeOuro.jar <arquivo_de_entrada> <tipo_de_busca>");
+			System.out.println("Tipo de busca: 'L' para largura, 'P' para profundidada, 'A' para A*");
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * @param type Indica o tipo de agente que deve ser instanciado. 
+	 * 'L' para largura, 'P' para profundidade, ou 'A' para A*. 
+	 * @return A instância solicitada para o tipo de agente.
+	 */
+	private static Agent getAgent(char type) {
+		switch (type) {
+		case 'L':
+			return new LimitedDeapthAgent(new Position(0, 0));
+		case 'P':
+			return new BreadthAgent(new Position(0, 0));
+		case 'A':
+			return new AStarAgent(new Position(0, 0));
+		}
+		return null;
+	}
+	
+	/**
+	 * Utiliza o agente para buscar e exibir a melhor a solução encontrada
+	 * para o problema. Imprime a pontuação, o número de pepitas coletadas,
+	 * as ações a serem tomadas e tempo de processamento para encontrar a
+	 * solução.
+	 * @param agent O agente que efetuará a busca da melhor solução.
+	 */
+	private static void searchAndShowSolution(Agent agent) {
+		long ti = System.currentTimeMillis();
+		Solution solution = agent.search();
+		long tf = System.currentTimeMillis();
+		System.out.println(solution);
+		System.out.println("Tempo de processamento = " + (tf - ti) / 1000.0 + " s");
+	}
+	
+	/**
+	 * Inicializa a variável de ambiente a partir do arquivo de entrada.
+	 * Mantém ela nula caso ocorra algum erro.
+	 * @param file Arquivo de entrada com o mapa da mina de acordo com 
+	 * as especificações do EP.
+	 */
 	private static void setEnvironment(String file) {
 		try	{
 			tryToSetEnvironment(file);
@@ -57,52 +120,44 @@ public class Main {
 			System.err.println("Erro na leitura do arquivo de entrada.");
 		}
 		catch (Exception ex) {
-			System.err.println("Arquivo de entrada mal formatado.");
+			System.err.println("Arquivo de entrada mal formatado:");
+			System.err.println(ex.getMessage());
 		}
 		environment = null;
 	}
 
+	/**
+	 * @param file Arquivo de entrada com o mapa da mina de acordo com 
+	 * as especificações do EP.
+	 * @throws FileNotFoundException Arquivo não encontrado.
+	 * @throws IOException Erro na leitura do arquivo.
+	 * @throws Exception Arquivo de entrada com formatação diferente da especificação.
+	 */
 	private static void tryToSetEnvironment(String file) 
 			throws FileNotFoundException, IOException, Exception {
 		BufferedReader input = new BufferedReader(new FileReader(file));
 		String line = input.readLine();
 		short size = Short.parseShort(line);
+		if (size > 50) {
+			input.close();
+			throw new Exception("Tamanho da mina maior do que 50."); 
+		}
 		environment = new Environment(size);
 		for (short row = 0; row < size; row++) {
 			line = input.readLine();
 			for (short col = 0; col < size; col++) {
+				if (line.length() != size) {
+					input.close();
+					throw new Exception("Largura da mina não compatível com seu tamanho.");
+				}
 				char content = line.charAt(col);
+				if (content != '0' && content != '1' && content != '*') {
+					input.close();
+					throw new Exception("Conteúdo da mina não identificado.");
+				}
 				environment.setMineContent(new Position(row, col), content);
 			}
 		}
 		input.close();
 	}
 }
-
-/*
-Position p1 = new Position(1, 10);
-Position p2 = new Position(1, 10);
-Position p3 = new Position(10, 1);
-
-List<Position> l1 = new ArrayList<Position>();
-l1.add(p1); 
-l1.add(p3);
-
-List<Position> l2 = new ArrayList<Position>();
-l2.add(p3); 
-l2.add(p2);
-
-State s1 = new State(p1, l1);
-State s2 = new State(p2, l2);
-State s3 = s2.clone();
-s3.getPosition().moveRight();
-
-System.out.println(l1.contains(p2));
-System.out.println(l2.contains(p1));
-System.out.println(l1.hashCode());
-System.out.println(l2.hashCode());
-System.out.println(p1.hashCode());
-System.out.println(p2.hashCode());
-System.out.println(s1.equals(s2));
-System.out.println(s3.equals(s2));
-*/
