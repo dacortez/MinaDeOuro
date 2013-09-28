@@ -27,7 +27,7 @@ public abstract class Agent {
 	// Nó raiz da árvore de busca gerada.
 	protected Node root;
 	// Número de pepitas a serem coletadas como objetivo de busca.
-	protected int goldGoal;
+	private int goldGoal;
 	
 	/**
 	 * @param startPosition Define a posição do agente na mina e a 
@@ -37,6 +37,13 @@ public abstract class Agent {
 		this.startPosition = startPosition;
 		closed = new ArrayList<State>();
 		setRoot();
+	}
+	
+	/**
+	 * @return O número de pepitas a serem coletadas como objetivo de busca.
+	 */
+	protected int getGoldGoal() {
+		return goldGoal;
 	}
 	
 	/**

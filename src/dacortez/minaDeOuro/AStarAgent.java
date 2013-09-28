@@ -6,6 +6,7 @@
  */
 package dacortez.minaDeOuro;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -16,6 +17,10 @@ import java.util.Queue;
  * 
  * @author dacortez
  * @version 2013.09.26
+ */
+/**
+ * @author dacortez
+ *
  */
 public class AStarAgent extends Agent {
 
@@ -74,27 +79,64 @@ public class AStarAgent extends Agent {
 	}
 	
 	/**
+	 * Esta heurística avalia a distância do agente até a pepita mais próxima,
+	 * depois a partir dessa posição para a póxima mais perto e assim por diante
+	 * até visitar todas as pepitas necessárias. Por fim avalia a distância
+	 * da última pepita visitada até a posição de início. Retorna os pontos
+	 * obtidos pela coleta das pepitas menos a distância percorrida.
 	 * @param node O nó da árvore de busca sobre o qual deseja avaliar a função h.
 	 * @return O valor da função h aplicada ao nó.
 	 */
-	private int getH(Node node) {
+	protected int getH(Node node) {
 		Position agentPosition = node.getState().getPosition();
-		List<Position> picked = node.getState().getPicked();
-		List<Position> goldPositions = Main.getEnvironment().getGoldPositions();
-		Position nearest = null;
+		List<Position> notPicked = getNotPicked(node.getState().getPicked());
+		int totalPicked = node.getState().getTotalPicked();
+		int goldGoal = getGoldGoal();
+		int steps = 0;
+		Position previous = agentPosition;
+		Position next = agentPosition;
+		for (int i = totalPicked + 1; i <= goldGoal; i++) {
+			next = getNearst(previous, notPicked);
+			steps += previous.distTo(next);
+			notPicked.remove(next);
+			previous = next;
+		}
+		steps += next.distTo(startPosition);
+		return 4 * Main.getEnvironment().getSize() * (goldGoal - totalPicked) - steps; 
+	}
+	
+	/**
+	 * @param picked Lista com as posições das pepitas de ouro que o 
+	 * agente já pegou.
+	 * @return Lista com as posções das pepitas que o agente ainda 
+	 * não pegou.
+	 */
+	private List<Position> getNotPicked(List<Position> picked) {
+		List<Position> gold = Main.getEnvironment().getGoldPositions();
+		List<Position> notPicked = new ArrayList<Position>();
+		for (Position position: gold) 
+			if (!picked.contains(position))
+				notPicked.add(position);
+		return notPicked;
+	}
+	
+	/**
+	 * @param from Posição atual a partir da qual se deseja encontrar a 
+	 * posição mais póxima na lista.
+	 * @param positions Lista de posições.
+	 * @return A posição da lista positions que está mais próxima da 
+	 * posição from.
+	 */
+	private Position getNearst(Position from, List<Position> positions) {
 		int min = 2 * Main.getEnvironment().getSize();
-		for (Position gold: goldPositions)
-			if (!picked.contains(gold)) {
-				int dist = agentPosition.distTo(gold);
-				if (dist < min) {
-					nearest = gold;
-					min = dist;
-				}
+		Position nearest = null;
+		for (Position position: positions) {
+			int dist = from.distTo(position);
+			if (dist < min) {
+				nearest = position;
+				min = dist;
 			}
-		if (nearest != null)
-			return -min - nearest.distTo(startPosition) + 4 * Main.getEnvironment().getSize();
-		return -agentPosition.distTo(startPosition);
-		// O caso de retorno 0 corresponde a uma busca uniforme.
-		// return 0;
+		}
+		return nearest;
 	}
 }
