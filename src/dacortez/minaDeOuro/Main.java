@@ -16,7 +16,8 @@ import java.io.IOException;
  * instância o tipo de agente escolhido. O objeto Environment pode ser 
  * acessado estaticamente pois é único ao longo da vida do agente. 
  * Os tipos de agente que podem ser instanciados efetuam busca em 
- * largura limitada, busca em profundidade, ou busca A*.
+ * largura limitada, busca em profundidade, busca A* e busca 
+ * uniforme.
  * 
  * @author dacortez
  * @version 2013.09.27
@@ -39,7 +40,7 @@ public class Main {
 	 * @param args Argumentos passados na linha de comando. O primeiro 
 	 * parâmetro deve ser o arquivo de entrada com a descrição da mina 
 	 * e o segundo deve ser o tipo do agente, sendo 'L' para largura, 
-	 * 'P' para profundidade e 'A' para A*. 
+	 * 'P' para profundidade, 'A' para A* e 'U' para uniforme. 
 	 */
 	public static void main(String[] args) {
 		if (correctArgs(args)) {
@@ -50,7 +51,7 @@ public class Main {
 				if (agent != null)
 					searchAndShowSolution(agent);
 				else
-					System.out.println("Agente n�o definido.");
+					System.out.println("Agente não definido.");
 			}
 		}
 	}
@@ -62,9 +63,9 @@ public class Main {
 	 * @return true se argumentos passados corretamente, false caso contrário.
 	 */
 	private static boolean correctArgs(String args[]) {
-		if (args.length < 2 || !args[1].matches("L|P|A")) {
+		if (args.length < 2 || !args[1].matches("L|P|A|U")) {
 			System.out.println("Uso: java -jar MinaDeOuro.jar <arquivo_de_entrada> <tipo_de_busca>");
-			System.out.println("Tipo de busca: 'L' para largura, 'P' para profundidada, 'A' para A*");
+			System.out.println("'L' para largura, 'P' para profundidada, 'A' para A*, 'U' para uniforme");
 			return false;
 		}
 		return true;
@@ -72,18 +73,20 @@ public class Main {
 
 	/**
 	 * @param type Indica o tipo de agente que deve ser instanciado. 
-	 * 'L' para largura, 'P' para profundidade, ou 'A' para A*. 
+	 * 'L' para largura, 'P' para profundidade, 'A' para A*, ou 'U' para uniforme. 
 	 * @return A instância solicitada para o tipo de agente. Nulo caso
 	 * o tipo seja inválido.
 	 */
 	private static Agent getAgent(char type) {
 		switch (type) {
-		case 'L':
-			return new LimitedDeapthAgent(new Position(0, 0));
 		case 'P':
+			return new LimitedDeapthAgent(new Position(0, 0));
+		case 'L':
 			return new BreadthAgent(new Position(0, 0));
 		case 'A':
-			return new AStarAgent(new Position(0, 0));
+			return new AStarAgentHNearst(new Position(0, 0));
+		case 'U':
+			return new AStarAgentHZero(new Position(0, 0));
 		}
 		return null;
 	}
