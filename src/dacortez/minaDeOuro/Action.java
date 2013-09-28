@@ -1,5 +1,5 @@
 /**
- * MAC0425 - Inteligncia Artificial
+ * MAC0425 - InteligÃªncia Artificial
  * EP1 - Mina de Ouro
  * 
  * Daniel Augusto Cortez - 2960291
@@ -7,7 +7,7 @@
 package dacortez.minaDeOuro;
 
 /**
- * Define as a›es que o agente pode executar na mina.
+ * Define as aï¿½ï¿½es que o agente pode executar na mina.
  * RIGHT: mover para direita.
  *  LEFT: mover para esquerda.
  *  DOWN: mover para baixo.
@@ -19,12 +19,12 @@ package dacortez.minaDeOuro;
 public enum Action {
 	RIGHT("D"), LEFT("E"), UP("C"), DOWN("B"), PICK("P");
 	
-	// String descritiva de cada a‹o.
+	// String descritiva de cada aï¿½ï¿½o.
 	private final String value;
 
     /**
-     * @param value String descritiva da a‹o para ser utlizada 
-     * na impress‹o da solu‹o.
+     * @param value String descritiva da aï¿½ï¿½o para ser utlizada 
+     * na impressï¿½o da soluï¿½ï¿½o.
      */
     Action(String value) {
         this.value = value;
