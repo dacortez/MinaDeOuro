@@ -79,7 +79,7 @@ public class Main {
 	private static Agent getAgent(char type) {
 		switch (type) {
 		case 'P':
-			return new LimitedDeapthAgent(new Position(0, 0));
+			return new LimitedDepthAgent(new Position(0, 0));
 		case 'L':
 			return new BreadthAgent(new Position(0, 0));
 		case 'A':

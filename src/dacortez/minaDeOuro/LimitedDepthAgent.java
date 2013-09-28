@@ -12,7 +12,7 @@ package dacortez.minaDeOuro;
  * @author dacortez
  * @version 2013.09.26
  */
-public class LimitedDeapthAgent extends Agent {
+public class LimitedDepthAgent extends Agent {
 	// Profundidade limite da busca.
 	private static final int MAX_LIMIT = 150;
 	
@@ -20,7 +20,7 @@ public class LimitedDeapthAgent extends Agent {
 	 * @param startPosition Define a posição do agente na mina e a 
 	 * posição para onde ele deve voltar no final da sua exploração.
 	 */
-	public LimitedDeapthAgent(Position startPosition) {
+	public LimitedDepthAgent(Position startPosition) {
 		super(startPosition);
 	}
 
