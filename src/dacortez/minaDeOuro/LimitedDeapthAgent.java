@@ -1,5 +1,5 @@
 /**
- * MAC0425 - Inteligência Artificial
+ * MAC0425 - Intelig√™ncia Artificial
  * EP1 - Mina de Ouro
  * 
  * Daniel Augusto Cortez - 2960291
@@ -7,7 +7,7 @@
 package dacortez.minaDeOuro;
 
 /**
- * Este agente implementa o método de busca em profundidade limitada.
+ * Este agente implementa o m√©todo de busca em profundidade limitada.
  * 
  * @author dacortez
  * @version 2013.09.26
@@ -17,15 +17,15 @@ public class LimitedDeapthAgent extends Agent {
 	private static final int MAX_LIMIT = 100;
 	
 	/**
-	 * @param startPosition Define a posição do agente na mina e a 
-	 * posição para onde ele deve voltar no final da sua exploração.
+	 * @param startPosition Define a posi√ß√£o do agente na mina e a 
+	 * posi√ß√£o para onde ele deve voltar no final da sua explora√ß√£o.
 	 */
 	public LimitedDeapthAgent(Position startPosition) {
 		super(startPosition);
 	}
 
 	/**
-	 * @return O objeto Solution correspondente a melhor solução encontrada 
+	 * @return O objeto Solution correspondente a melhor solu√ß√£o encontrada 
 	 * pelo agente de acordo com a busca em profundidade limitada.
 	 * @see dacortez.minaDeOuro.Agent#getSolution()
 	 */
@@ -36,9 +36,9 @@ public class LimitedDeapthAgent extends Agent {
 	}
 	
 	/**
-	 * @param node Nó a partir do qual se faz a busca.
+	 * @param node N√≥ a partir do qual se faz a busca.
 	 * @param limit Valor da profundidade limite da busca. 
-	 * @return O objeto Solution correspondente a melhor solução encontrada 
+	 * @return O objeto Solution correspondente a melhor solu√ß√£o encontrada 
 	 * (pode ser do tipo Cutoff caso o limite seja atingido).
 	 */
 	private Solution recursiveDLS(Node node, int limit) {

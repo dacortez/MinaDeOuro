@@ -1,5 +1,5 @@
 /**
- * MAC0425 - Inteligência Artificial
+ * MAC0425 - Intelig√™ncia Artificial
  * EP1 - Mina de Ouro
  * 
  * Daniel Augusto Cortez - 2960291
@@ -11,34 +11,34 @@ import java.util.List;
 
 /**
  * Representa o estado onde se encontra o agente em sua busca.
- * O estado é representado pela posição do agente e uma lista
- * das posições das pepitas de ouro recolhidas.
+ * O estado √© representado pela posi√ß√£o do agente e uma lista
+ * das posi√ß√µes das pepitas de ouro recolhidas.
  *  
  * @author dacortez
  * @version 2013.09.26
  */
 public class State {
-	// Posição atual do agente na mina.
+	// Posi√ß√£o atual do agente na mina.
 	private Position position;
-	// Posições das pepitas de ouro recolhidas.
+	// Posi√ß√µes das pepitas de ouro recolhidas.
 	private List<Position> picked;
 		
 	/**
-	 * @return A posição do agente na mina.
+	 * @return A posi√ß√£o do agente na mina.
 	 */
 	public Position getPosition() {
 		return position;
 	}
 	
 	/**
-	 * @return A lista das posições das pepitas de ouro recolhidas.
+	 * @return A lista das posi√ß√µes das pepitas de ouro recolhidas.
 	 */
 	public List<Position> getPicked() {
 		return picked;
 	}
 	
 	/**.
-	 * @param position A posição do agente na mina.
+	 * @param position A posi√ß√£o do agente na mina.
 	 */
 	public State(Position position) {
 		this.position = position;
@@ -46,8 +46,8 @@ public class State {
 	}
 	
 	/**
-	 * @param position A posição do agente na mina.
-	 * @param picked A lista das posições das pepitas de ouro recolhidas.
+	 * @param position A posi√ß√£o do agente na mina.
+	 * @param picked A lista das posi√ß√µes das pepitas de ouro recolhidas.
 	 */
 	public State(Position position, List<Position> picked) {
 		this.position = position;
@@ -55,15 +55,15 @@ public class State {
 	}
 	
 	/**
-	 * @return O número de pepitas de ouro recolhidas pelo agente no estado.
+	 * @return O n√∫mero de pepitas de ouro recolhidas pelo agente no estado.
 	 */
 	public int getTotalPicked() {
 		return picked.size();
 	}
 	
 	/**
-	 * Função sucessora para o estado atual.
-	 * @return Lista de pares (estado, ação) que podem ser gerados a partir
+	 * Fun√ß√£o sucessora para o estado atual.
+	 * @return Lista de pares (estado, a√ß√£o) que podem ser gerados a partir
 	 * do estado atual.
 	 */
 	public List<ActionState> getSuccessors() {
@@ -79,9 +79,9 @@ public class State {
 	}
 	
 	/**
-	 * Se for possível, adiciona à lista um novo par (estado, ação) 
-	 * correspondente a ação de pegar ouro a partir do estado atual.
-	 * @param list Lista atual de pares (estado, ação) sendo atualizada.
+	 * Se for poss√≠vel, adiciona a lista um novo par (estado, a√ß√£o) 
+	 * correspondente a a√ß√£o de pegar ouro a partir do estado atual.
+	 * @param list Lista atual de pares (estado, a√ß√£o) sendo atualizada.
 	 */
 	private void addStateForPickAction(List<ActionState> list) {
 		if (Main.getEnvironment().isThereGold(position))
@@ -93,18 +93,18 @@ public class State {
 	}
 	
 	/**
-	 * Verifica se o agente já pegou o ouro em sua posição atual.
-	 * @return true se a pepita de ouro na posição atual do agente já foi
-	 * coletada, false caso contrário.
+	 * Verifica se o agente j√° pegou o ouro em sua posi√ß√£o atual.
+	 * @return true se a pepita de ouro na posi√ß√£o atual do agente j√° foi
+	 * coletada, false caso contr√°rio.
 	 */
 	private boolean goldAlreadyPicked() {
 		return picked.contains(position);
 	}
 	
 	/**
-	 * Se for possível, adiciona à lista um novo par (estado, ação) 
-	 * correspondente a ação de mover para direita a partir do estado atual.
-	 * @param list Lista atual de pares (estado, ação) sendo atualizada.
+	 * Se for poss√≠vel, adiciona a lista um novo par (estado, a√ß√£o) 
+	 * correspondente a a√ß√£o de mover para direita a partir do estado atual.
+	 * @param list Lista atual de pares (estado, a√ß√£o) sendo atualizada.
 	 */
 	private void addStateForRightAction(List<ActionState> list) {
 		if (Main.getEnvironment().canMoveRight(position)) {
@@ -115,9 +115,9 @@ public class State {
 	}
 
 	/**
-	 * Se for possível, adiciona à lista um novo par (estado, ação) 
-	 * correspondente a ação de mover para esquerda a partir do estado atual.
-	 * @param list Lista atual de pares (estado, ação) sendo atualizada.
+	 * Se for poss√≠vel, adiciona a lista um novo par (estado, a√ß√£o) 
+	 * correspondente a a√ß√£o de mover para esquerda a partir do estado atual.
+	 * @param list Lista atual de pares (estado, a√ß√£o) sendo atualizada.
 	 */
 	private void addStateForLeftAction(List<ActionState> list) {
 		if (Main.getEnvironment().canMoveLeft(position)) {
@@ -128,9 +128,9 @@ public class State {
 	}
 
 	/**
-	 * Se for possível, adiciona à lista um novo par (estado, ação) 
-	 * correspondente a ação de mover para cima a partir do estado atual.
-	 * @param list Lista atual de pares (estado, ação) sendo atualizada.
+	 * Se for poss√≠vel, adiciona a lista um novo par (estado, a√ß√£o) 
+	 * correspondente a a√ß√£o de mover para cima a partir do estado atual.
+	 * @param list Lista atual de pares (estado, a√ß√£o) sendo atualizada.
 	 */
 	private void addStateForUpAction(List<ActionState> list) {
 		if (Main.getEnvironment().canMoveUp(position)) {
@@ -141,9 +141,9 @@ public class State {
 	}
 
 	/**
-	 * Se for possível, adiciona à lista um novo par (estado, ação) 
-	 * correspondente a ação de mover para baixo a partir do estado atual.
-	 * @param list Lista atual de pares (estado, ação) sendo atualizada.
+	 * Se for poss√≠vel, adiciona a lista um novo par (estado, a√ß√£o) 
+	 * correspondente a a√ß√£o de mover para baixo a partir do estado atual.
+	 * @param list Lista atual de pares (estado, a√ß√£o) sendo atualizada.
 	 */
 	private void addStateForDownAction(List<ActionState> list) {
 		if (Main.getEnvironment().canMoveDown(position)) {

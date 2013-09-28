@@ -7,7 +7,7 @@
 package dacortez.minaDeOuro;
 
 /**
- * Define as a��es que o agente pode executar na mina.
+ * Define as ações que o agente pode executar na mina.
  * RIGHT: mover para direita.
  *  LEFT: mover para esquerda.
  *  DOWN: mover para baixo.
@@ -19,12 +19,12 @@ package dacortez.minaDeOuro;
 public enum Action {
 	RIGHT("D"), LEFT("E"), UP("C"), DOWN("B"), PICK("P");
 	
-	// String descritiva de cada a��o.
+	// String descritiva de cada ação.
 	private final String value;
 
     /**
-     * @param value String descritiva da a��o para ser utlizada 
-     * na impress�o da solu��o.
+     * @param value String descritiva da ação para ser utlizada 
+     * na impressão da solução.
      */
     Action(String value) {
         this.value = value;

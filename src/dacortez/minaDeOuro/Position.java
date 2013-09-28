@@ -1,5 +1,5 @@
 /**
- * MAC0425 - Inteligência Artificial
+ * MAC0425 - Intelig√™ncia Artificial
  * EP1 - Mina de Ouro
  * 
  * Daniel Augusto Cortez - 2960291
@@ -7,8 +7,8 @@
 package dacortez.minaDeOuro;
 
 /**
- * Representa uma posição na mina como o par ordenado (linha, coluna).
- * A posição (0, 0) corresponde ao canto superior esquerdo.
+ * Representa uma posi√ß√£o na mina como o par ordenado (linha, coluna).
+ * A posi√ß√£o (0, 0) corresponde ao canto superior esquerdo.
  * Os valores de linha crescem para baixo e os valores de coluna 
  * crescem para direita.
  * 
@@ -16,9 +16,9 @@ package dacortez.minaDeOuro;
  * @version 2013.09.26
  */
 public class Position {
-	// Número da linha. 
+	// N√∫mero da linha. 
 	private short row;
-	// Número da coluna.
+	// N√∫mero da coluna.
 	private short col;
 
 	/**
@@ -59,7 +59,7 @@ public class Position {
 	}
 
 	/**
-	 * Move esta posição para direita, incrementando o valor 
+	 * Move esta posi√ß√£o para direita, incrementando o valor 
 	 * da coluna em uma unidade.
 	 */
 	public void moveRight() {
@@ -67,7 +67,7 @@ public class Position {
 	}
 	
 	/**
-	 * Move esta posição para esquerda, decrementando o valor 
+	 * Move esta posi√ß√£o para esquerda, decrementando o valor 
 	 * da coluna em uma unidade.
 	 */
 	public void moveLeft() {
@@ -75,7 +75,7 @@ public class Position {
 	}
 	
 	/**
-	 * Move esta posição para baixo, incrementando o valor 
+	 * Move esta posi√ß√£o para baixo, incrementando o valor 
 	 * da linha em uma unidade.
 	 */
 	public void moveDown() {
@@ -83,7 +83,7 @@ public class Position {
 	}
 	
 	/**
-	 * Move esta posição para cima, incrementando o valor 
+	 * Move esta posi√ß√£o para cima, incrementando o valor 
 	 * da linha em uma unidade.
 	 */
 	public void moveUp() {
@@ -92,11 +92,11 @@ public class Position {
 	
 	
 	/**
-	 * Calcula a distância entre a posição atual e a posição other,
-	 * sem considerar as obstruções da mina, considerando apenas
+	 * Calcula a dist√¢ncia entre a posi√ß√£o atual e a posi√ß√£o other,
+	 * sem considerar as obstru√ß√µes da mina, considerando apenas
 	 * movimentos verticais e horizontais. 
-	 * @param other Outra posição
-	 * @return A distância entre a posição atual e a posição other.
+	 * @param other Outra posi√ß√£o.
+	 * @return A dist√¢ncia entre a posi√ß√£o atual e a posi√ß√£o other.
 	 */
 	public int distTo(Position other) {
 		return Math.abs(other.row - row) + Math.abs(other.col - col);

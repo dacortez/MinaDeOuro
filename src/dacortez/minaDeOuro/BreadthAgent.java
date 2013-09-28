@@ -1,5 +1,5 @@
 /**
- * MAC0425 - Inteligência Artificial
+ * MAC0425 - Intelig√™ncia Artificial
  * EP1 - Mina de Ouro
  * 
  * Daniel Augusto Cortez - 2960291
@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Este agente implementa o método de busca em largura.
+ * Este agente implementa o m√©todo de busca em largura.
  * 
  * @author dacortez
  * @version 2013.09.26
@@ -18,15 +18,15 @@ import java.util.Queue;
 public class BreadthAgent extends Agent {
 	
 	/**
-	 * @param startPosition Define a posição do agente na mina e a 
-	 * posição para onde ele deve voltar no final da sua exploração.
+	 * @param startPosition Define a posi√ß√£o do agente na mina e a 
+	 * posi√ß√£o para onde ele deve voltar no final da sua explora√ß√£o.
 	 */
 	public BreadthAgent(Position startPosition) {
 		super(startPosition);
 	}
 	
 	/**
-	 * @return O objeto Solution correspondente a melhor solução encontrada 
+	 * @return O objeto Solution correspondente a melhor solu√ß√£o encontrada 
 	 * pelo agente de acordo com a busca em largura.
 	 * @see dacortez.minaDeOuro.Agent#getSolution()
 	 */

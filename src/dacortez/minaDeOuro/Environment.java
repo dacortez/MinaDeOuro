@@ -1,5 +1,5 @@
 /**
- * MAC0425 - Inteligência Artificial
+ * MAC0425 - Intelig√™ncia Artificial
  * EP1 - Mina de Ouro
  * 
  * Daniel Augusto Cortez - 2960291
@@ -10,39 +10,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Representa o ambiente da mina, contendo um mapa com suas posições 
- * livres, obstruídas e com pepitas de ouro. Possui métodos que permitem 
- * ao agente decidir como se mover ou pegar ouro na mina. 
+ * Representa o ambiente da mina, contendo um mapa com suas posi√ß√µes 
+ * livres, obstru√≠das e com pepitas de ouro. Possui m√©todos que permitem 
+ * ao agente decidir como se mover ou se √© poss√≠vel pegar ouro. 
  * 
  * @author dacortez
  * @version 2013.09.26
  */
 public class Environment {
-	// A dimensão da mina.
+	// A dimens√£o da mina.
 	private short size;
 	// O mapa da mina representado por uma matriz de caracteres.
 	private char[][] mine;
-	// A lista com as posições das pepitas de ouro da mina.
+	// A lista com as posi√ß√µes das pepitas de ouro da mina.
 	private List<Position> goldPositions;
 	
 	
 	/**
-	 * @return A dimensão da mina.
+	 * @return A dimens√£o da mina.
 	 */
 	public short getSize() {
 		return size;
 	}
 	
 	/**
-	 * @return A lista com a posição de todas as pepitas de ouro
-	 * da mina na situação inicial.
+	 * @return A lista com a posi√ß√£o de todas as pepitas de ouro
+	 * da mina na situa√ß√£o inicial.
 	 */
 	public List<Position> getGoldPositions() {
 		return goldPositions;
 	}
 	
 	/**
-	 * @param size A dimensão da mina (número de linhas ou colunas do mapa).
+	 * @param size A dimens√£o da mina (n√∫mero de linhas ou colunas do mapa).
 	 */
 	public Environment(short size) {
 		this.size = size;
@@ -51,9 +51,9 @@ public class Environment {
 	}
 	
 	/**
-	 * Atribuí o conteúdo content na posição position da mina.
-	 * @param position A posição da mina onde se deseja atribuir o contúdo.
-	 * @param content O conteúdo (0, 1, ou *) a ser atribuído na posição.
+	 * Atribui o conte√∫do content na posi√ß√£o position da mina.
+	 * @param position A posi√ß√£o da mina onde se deseja atribuir o conte√∫do.
+	 * @param content O conte√∫do (0, 1, ou *) a ser atribu√≠do na posi√ß√£o.
 	 */
 	public void setMineContent(Position position, char content) {
 		int row = position.getRow();
@@ -64,16 +64,16 @@ public class Environment {
 	}
 	
 	/**
-	 * @return O número total de pepitas de ouro da mina na situação inicial. 
+	 * @return O n√∫mero total de pepitas de ouro da mina na situa√ß√£o inicial. 
 	 */
 	public int getTotalGold() {
 		return goldPositions.size();
 	}
 	
 	/**
-	 * @param position Posição atual na mina.
-	 * @return true se é possível se mover para direita a partir de position,
-	 * false caso contrário.
+	 * @param position Posi√ß√£o atual na mina.
+	 * @return true se √© poss√≠vel se mover para direita a partir de position,
+	 * false caso contr√°rio.
 	 */
 	public boolean canMoveRight(Position position) {
 		int row = position.getRow();
@@ -82,9 +82,9 @@ public class Environment {
 	}
 	
 	/**
-	 * @param position Posição atual na mina.
-	 * @return true se é possível se mover para esquerda a partir de position,
-	 * false caso contrário.
+	 * @param position Posi√ß√£o atual na mina.
+	 * @return true se √© poss√≠vel se mover para esquerda a partir de position,
+	 * false caso contr√°rio.
 	 */
 	public boolean canMoveLeft(Position position) {
 		int row = position.getRow();
@@ -93,9 +93,9 @@ public class Environment {
 	}
 	
 	/**
-	 * @param position Posição atual na mina.
-	 * @return true se é possível se mover para cima a partir de position,
-	 * false caso contrário.
+	 * @param position Posi√ß√£o atual na mina.
+	 * @return true se √© poss√≠vel se mover para cima a partir de position,
+	 * false caso contr√°rio.
 	 */
 	public boolean canMoveUp(Position position) {
 		int row = position.getRow();
@@ -104,9 +104,9 @@ public class Environment {
 	}
 	
 	/**
-	 * @param position Posição atual na mina.
-	 * @return true se é possível se mover para baixo a partir de position,
-	 * false caso contrário.
+	 * @param position Posi√ß√£o atual na mina.
+	 * @return true se √© poss√≠vel se mover para baixo a partir de position,
+	 * false caso contr√°rio.
 	 */
 	public boolean canMoveDown(Position position) {
 		int row = position.getRow();
@@ -115,8 +115,8 @@ public class Environment {
 	}
 	
 	/**
-	 * @param position Posição atual na mina.
-	 * @return true se existe uma pepita de ouro em position, false caso contrário.
+	 * @param position Posi√ß√£o atual na mina.
+	 * @return true se existe uma pepita de ouro em position, false caso contr√°rio.
 	 */
 	public boolean isThereGold(Position position) {
 		int row = position.getRow();
@@ -125,11 +125,11 @@ public class Environment {
 	}
 	
 	/**
-	 * Avalia a performance do agente ao tomar a ação action. 
-	 * Caso a ação seja pegar ouro, retorna 4n, onde n é a dimensão 
-	 * da mina. Caso contrário, retorna -1. 
-	 * @param action A ação tomada pelo agente.
-	 * @return O custo associado à ação action.
+	 * Avalia a performance do agente ao tomar a a√ß√£o action. 
+	 * Caso a a√ß√£o seja pegar ouro, retorna 4n, onde n √© a dimens√£o 
+	 * da mina. Caso contr√°rio, retorna -1. 
+	 * @param action A a√ß√£o tomada pelo agente.
+	 * @return O custo associado a a√ß√£o action.
 	 */
 	public int performanceMeasurement(Action action) {
 		if (action == Action.PICK)

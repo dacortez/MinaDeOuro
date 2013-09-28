@@ -1,5 +1,5 @@
 /**
- * MAC0425 - Inteligência Artificial
+ * MAC0425 - Intelig√™ncia Artificial
  * EP1 - Mina de Ouro
  * 
  * Daniel Augusto Cortez - 2960291
@@ -13,8 +13,8 @@ import java.io.IOException;
 
 /**
  * Cria o objeto Enviroment apropriado a partir do arquivo de entrada e
- * instância o tipo de agente escolhido. O objeto Environment pode ser 
- * acessado estaticamente pois é único ao longo da vida do agente. 
+ * inst√¢ncia o tipo de agente escolhido. O objeto Environment pode ser 
+ * acessado estaticamente pois √© √∫nico ao longo da vida do agente. 
  * Os tipos de agente que podem ser instanciados efetuam busca em 
  * largura limitada, busca em profundidade, ou busca A*.
  * 
@@ -22,7 +22,7 @@ import java.io.IOException;
  * @version 2013.09.27
  */
 public class Main {
-	// Variável contendo o mapa da mina.
+	// Vari√°vel contendo o mapa da mina.
 	private static Environment environment;
 	
 	
@@ -35,9 +35,9 @@ public class Main {
 	
 	/**
 	 * Cria o ambiente, instancializa o agente apropriadao e efetua 
-	 * a busca da melhor solução para o problema.
+	 * a busca da melhor solu√ß√£o para o problema.
 	 * @param args Argumentos passados na linha de comando. O primeiro 
-	 * parâmetro deve ser o arquivo de entrada com a descrição da mina 
+	 * par√¢metro deve ser o arquivo de entrada com a descri√ß√£o da mina 
 	 * e o segundo deve ser o tipo do agente, sendo 'L' para largura, 
 	 * 'P' para profundidade e 'A' para A*. 
 	 */
@@ -50,7 +50,7 @@ public class Main {
 				if (agent != null)
 					searchAndShowSolution(agent);
 				else
-					System.out.println("Agente não definido.");
+					System.out.println("Agente nÔøΩo definido.");
 			}
 		}
 	}
@@ -59,7 +59,7 @@ public class Main {
 	/**
 	 * Verifica se os argumentos foram passados corretamente.
 	 * @param args Argumentos passados na linha de comando.
-	 * @return true se argumentos passados corretamente, false caso contrário.
+	 * @return true se argumentos passados corretamente, false caso contr√°rio.
 	 */
 	private static boolean correctArgs(String args[]) {
 		if (args.length < 2 || !args[1].matches("L|P|A")) {
@@ -73,7 +73,8 @@ public class Main {
 	/**
 	 * @param type Indica o tipo de agente que deve ser instanciado. 
 	 * 'L' para largura, 'P' para profundidade, ou 'A' para A*. 
-	 * @return A instância solicitada para o tipo de agente.
+	 * @return A inst√¢ncia solicitada para o tipo de agente. Nulo caso
+	 * o tipo seja inv√°lido.
 	 */
 	private static Agent getAgent(char type) {
 		switch (type) {
@@ -88,11 +89,11 @@ public class Main {
 	}
 	
 	/**
-	 * Utiliza o agente para buscar e exibir a melhor a solução encontrada
-	 * para o problema. Imprime a pontuação, o número de pepitas coletadas,
-	 * as ações a serem tomadas e tempo de processamento para encontrar a
-	 * solução.
-	 * @param agent O agente que efetuará a busca da melhor solução.
+	 * Utiliza o agente para buscar e exibir a melhor a solu√ß√£o encontrada
+	 * para o problema. Imprime a pontua√ß√£o, o n√∫mero de pepitas coletadas,
+	 * as a√ß√µes a serem tomadas e tempo de processamento para encontrar a
+	 * solu√ß√£o.
+	 * @param agent O agente que efetuar√° a busca da melhor solu√ß√£o.
 	 */
 	private static void searchAndShowSolution(Agent agent) {
 		long ti = System.currentTimeMillis();
@@ -103,10 +104,10 @@ public class Main {
 	}
 	
 	/**
-	 * Inicializa a variável de ambiente a partir do arquivo de entrada.
-	 * Mantém ela nula caso ocorra algum erro.
+	 * Inicializa a vari√°vel de ambiente a partir do arquivo de entrada.
+	 * Mant√©m ela nula caso ocorra algum erro.
 	 * @param file Arquivo de entrada com o mapa da mina de acordo com 
-	 * as especificações do EP.
+	 * as especifica√ß√µes do EP.
 	 */
 	private static void setEnvironment(String file) {
 		try	{
@@ -114,7 +115,7 @@ public class Main {
 			return;
 		}
 		catch (FileNotFoundException ex) {
-			System.err.println("Arquivo de entrada não encontrado.");
+			System.err.println("Arquivo de entrada n√£o encontrado.");
 		}	
 		catch (IOException ex) {
 			System.err.println("Erro na leitura do arquivo de entrada.");
@@ -128,10 +129,10 @@ public class Main {
 
 	/**
 	 * @param file Arquivo de entrada com o mapa da mina de acordo com 
-	 * as especificações do EP.
-	 * @throws FileNotFoundException Arquivo não encontrado.
+	 * as especifica√ß√µes do EP.
+	 * @throws FileNotFoundException Arquivo n√£o encontrado.
 	 * @throws IOException Erro na leitura do arquivo.
-	 * @throws Exception Arquivo de entrada com formatação diferente da especificação.
+	 * @throws Exception Arquivo de entrada com formata√ß√£o diferente da especifica√ß√£o.
 	 */
 	private static void tryToSetEnvironment(String file) 
 			throws FileNotFoundException, IOException, Exception {
@@ -148,12 +149,12 @@ public class Main {
 			for (short col = 0; col < size; col++) {
 				if (line.length() != size) {
 					input.close();
-					throw new Exception("Largura da mina não compatível com seu tamanho.");
+					throw new Exception("Largura da mina incompat√≠vel com seu tamanho.");
 				}
 				char content = line.charAt(col);
 				if (content != '0' && content != '1' && content != '*') {
 					input.close();
-					throw new Exception("Conteúdo da mina não identificado.");
+					throw new Exception("Conte√∫do da mina n√£o identificado.");
 				}
 				environment.setMineContent(new Position(row, col), content);
 			}

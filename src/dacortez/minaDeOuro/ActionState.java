@@ -1,5 +1,5 @@
 /**
- * MAC0425 - Inteligência Artificial
+ * MAC0425 - Intelig√™ncia Artificial
  * EP1 - Mina de Ouro
  * 
  * Daniel Augusto Cortez - 2960291
@@ -7,20 +7,20 @@
 package dacortez.minaDeOuro;
 
 /**
- * Representa um par (action, state), onde o estado state é atingido
- * após a execução da ação action.
+ * Representa um par (action, state), onde o estado state √© atingido
+ * ap√≥s a execu√ß√£o da a√ß√£o action.
  * 
  * @author dacortez
  * @version 2013.09.26
  */
 public class ActionState {
-	// Variável com a ação.
+	// Vari√°vel com a a√ß√£o.
 	private Action action;
-	// Variável com o estado resultade da ação.
+	// Vari√°vel com o estado resultade da a√ß√£o.
 	private State state;
 	
 	/**
-	 * @return A ação do par (action, state).
+	 * @return A a√ß√£o do par (action, state).
 	 */
 	public Action getAction() {
 		return action;
@@ -34,8 +34,8 @@ public class ActionState {
 	}
 
 	/**
-	 * @param action A ação do par (action, state)
-	 * @param state O estado do par (action, state)
+	 * @param action A a√ß√£o do par (action, state).
+	 * @param state O estado do par (action, state).
 	 */
 	public ActionState(Action action, State state) {
 		this.action = action;

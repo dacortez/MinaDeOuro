@@ -1,5 +1,5 @@
 /**
- * MAC0425 - Inteligência Artificial
+ * MAC0425 - Intelig√™ncia Artificial
  * EP1 - Mina de Ouro
  * 
  * Daniel Augusto Cortez - 2960291
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Representa um nó da árvore de busca expandida pelo agente.
+ * Representa um n√≥ da √°rvore de busca expandida pelo agente.
  * 
  * @author dacortez
  * @version 2013.09.26
@@ -20,90 +20,90 @@ import java.util.List;
  *
  */
 public class Node {
-	// Estado associado ao nó.
+	// Estado associado ao n√≥.
 	private State state;
-	// Nó pai que que gerou este nó.
+	// N√≥ pai que que gerou este n√≥.
 	private Node parentNode;
-	// Ação que dá origem a este nó a partir do nó pai.
+	// A√ß√£o que d√° origem a este n√≥ a partir do n√≥ pai.
 	private Action action;
-	// Custo do caminho da raiz até este nó.
+	// Custo do caminho da raiz at√© este n√≥.
 	private int pathCost;
-	// Profundidade deste nó na árvore de busca.
+	// Profundidade deste n√≥ na √°rvore de busca.
 	private int depth;
 	
 	/**
-	 * @return O estada associada ao nó.
+	 * @return O estada associada ao n√≥.
 	 */
 	public State getState() {
 		return state;
 	}
 	
 	/**
-	 * @param state O estado associado ao nó.
+	 * @param state O estado associado ao n√≥.
 	 */
 	public void setState(State state) {
 		this.state = state;
 	}
 	
 	/**
-	 * @return O nó pai na árvore de busca.
+	 * @return O n√≥ pai na √°rvore de busca.
 	 */
 	public Node getParentNode() {
 		return parentNode;
 	}
 	
 	/**
-	 * @param parentNode O nó pai na árvore de busca.
+	 * @param parentNode O n√≥ pai na √°rvore de busca.
 	 */
 	public void setParentNode(Node parentNode) {
 		this.parentNode = parentNode;
 	}
 	
 	/**
-	 * @return A ação que gerou este nó a partir do pai.
+	 * @return A a√ß√£o que gerou este n√≥ a partir do pai.
 	 */
 	public Action getAction() {
 		return action;
 	}
 	
 	/**
-	 * @param action A ação que gerou este nó a partir do pai.
+	 * @param action A a√ß√£o que gerou este n√≥ a partir do pai.
 	 */
 	public void setAction(Action action) {
 		this.action = action;
 	}
 	
 	/**
-	 * @return O custo do caminho a partir da raiz até este nó.
+	 * @return O custo do caminho a partir da raiz at√© este n√≥.
 	 */
 	public int getPathCost() {
 		return pathCost;
 	}
 	
 	/**
-	 * @param pathCost O custo do caminho a partir da raiz até este nó.
+	 * @param pathCost O custo do caminho a partir da raiz at√© este n√≥.
 	 */
 	public void setPathCost(int pathCost) {
 		this.pathCost = pathCost;
 	}
 	
 	/**
-	 * @return A profundidade na árvore de busca deste nó.
+	 * @return A profundidade na √°rvore de busca deste n√≥.
 	 */
 	public int getDepth() {
 		return depth;
 	}
 	
 	/**
-	 * @param depth A profundidade na árvore de busca deste nó.
+	 * @param depth A profundidade na √°rvore de busca deste n√≥.
 	 */
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
 	
 	/**
-	 * @return Um lista com todos os nós que podem ser obtidos a partir
-	 * das posíveis ações do agente sobre o estado do nó atual. 
+	 * @return Um lista com todos os n√≥s que podem ser obtidos a partir
+	 * das poss√≠veis a√ß√µes do agente sobre o estado do n√≥ atual. 
 	 */
 	public List<Node> expand() {
 		List<Node> list = new ArrayList<Node>();

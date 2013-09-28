@@ -1,5 +1,5 @@
 /**
- * MAC0425 - Inteligência Artificial
+ * MAC0425 - Intelig√™ncia Artificial
  * EP1 - Mina de Ouro
  * 
  * Daniel Augusto Cortez - 2960291
@@ -7,9 +7,9 @@
 package dacortez.minaDeOuro;
 
 /**
- * Esta classe extende Solution apenas para ser utilizada no método
+ * Esta classe extende Solution apenas para ser utilizada no m√©todo
  * de busca em profundidade limitada para indicar que o limite da 
- * busca foi atingido, porém a solução procurada não foi encontrada.
+ * busca foi atingido, por√©m a solu√ß√£o procurada n√£o foi encontrada.
  *  
  * @author dacortez
  * @version 2013.09.26

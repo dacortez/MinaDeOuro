@@ -1,5 +1,5 @@
 /**
- * MAC0425 - Inteligência Artificial
+ * MAC0425 - Intelig√™ncia Artificial
  * EP1 - Mina de Ouro
  * 
  * Daniel Augusto Cortez - 2960291
@@ -12,7 +12,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
- * Este agente implementa o método de busca A*.
+ * Este agente implementa o m√©todo de busca A*.
  * 
  * @author dacortez
  * @version 2013.09.26
@@ -20,15 +20,15 @@ import java.util.Queue;
 public class AStarAgent extends Agent {
 
 	/**
-	 * @param startPosition Define a posição do agente na mina e a 
-	 * posição para onde ele deve voltar no final da sua exploração.
+	 * @param startPosition Define a posi√ß√£o do agente na mina e a 
+	 * posi√ß√£o para onde ele deve voltar no final da sua explora√ß√£o.
 	 */
 	public AStarAgent(Position startPosition) {
 		super(startPosition);
 	}
 
 	/**
-	 * @return O objeto Solution correspondente a melhor solução encontrada 
+	 * @return O objeto Solution correspondente a melhor solu√ß√£o encontrada 
 	 * pelo agente de acordo com a busca A*.
 	 * @see dacortez.minaDeOuro.Agent#getSolution()
 	 */
@@ -50,8 +50,8 @@ public class AStarAgent extends Agent {
 	}
 	
 	/**
-	 * @return Uma fila de prioridade de nós que utiliza como critério de 
-	 * comparação o valor da função f(n) = g(n) + h(n) avaliuada no nó n.
+	 * @return Uma fila de prioridade de n√≥s que utiliza como crit√©rio de 
+	 * compara√ß√£o o valor da fun√ß√£o f(n) = g(n) + h(n) avaliuada no n√≥ n.
 	 */
 	private Queue<Node> getPriorityQueue() {
 		int size = Main.getEnvironment().getSize();
@@ -66,16 +66,16 @@ public class AStarAgent extends Agent {
 	}
 	
 	/**
-	 * @param node O nó da árvore de busca sobre o qual deseja avaliar a função f.
-	 * @return O valor da função f aplicada ao nó.
+	 * @param node O n√≥ da √°rvore de busca sobre o qual deseja avaliar a fun√ß√£o f.
+	 * @return O valor da fun√ß√£o f aplicada ao n√≥.
 	 */
 	private int getF(Node node) {
 		return node.getPathCost() + getH(node);
 	}
 	
 	/**
-	 * @param node O nó da árvore de busca sobre o qual deseja avaliar a função h.
-	 * @return O valor da função h aplicada ao nó.
+	 * @param node O n√≥ da √°rvore de busca sobre o qual deseja avaliar a fun√ß√£o h.
+	 * @return O valor da fun√ß√£o h aplicada ao n√≥.
 	 */
 	private int getH(Node node) {
 		Position agentPosition = node.getState().getPosition();

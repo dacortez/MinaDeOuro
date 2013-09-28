@@ -1,5 +1,5 @@
 /**
- * MAC0425 - Inteligência Artificial
+ * MAC0425 - Intelig√™ncia Artificial
  * EP1 - Mina de Ouro
  * 
  * Daniel Augusto Cortez - 2960291
@@ -10,28 +10,28 @@ import java.util.Stack;
 
 
 /**
- * Representa a solução encontrada pelo agente de busca, contendo
- * o caminho total entre o nó raiz e o nó objetivo.
+ * Representa a solu√ß√£o encontrada pelo agente de busca, contendo
+ * o caminho total entre o n√≥ raiz e o n√≥ objetivo.
  * 
  * @author dacortez
  * @version 2013.09.26
  */
 public class Solution {
-	// O nó final (objetivo) encontrado pelo agente de busca.
+	// O n√≥ final (objetivo) encontrado pelo agente de busca.
 	private Node finalNode;
-	// Uma pilha com todos os nós do caminho entre o nó raiz e o nó final.
+	// Uma pilha com todos os n√≥s do caminho entre o n√≥ raiz e o n√≥ final.
 	private Stack<Node> stack;
 	
 	/**
-	 * @return A pilha contendo todos os nós do caminho entre o nó raiz 
-	 * e o nó final da solução.
+	 * @return A pilha contendo todos os n√µs do caminho entre o n√≥ raiz 
+	 * e o n√≥ final da solu√ß√£o.
 	 */
 	public Stack<Node> getStack() {
 		return stack;
 	}
 	
 	/**
-	 * @param finalNode O nó final (objetivo) encontrado pelo agente de busca.
+	 * @param finalNode O n√≥ final (objetivo) encontrado pelo agente de busca.
 	 */
 	public Solution(Node finalNode) {
 		this.finalNode = finalNode;
@@ -43,8 +43,8 @@ public class Solution {
 	}
 
 	/**
-	 * Cria a pilha contendo todos os nós do caminho entre o nó raiz 
-	 * e o nó final da solução.
+	 * Cria a pilha contendo todos os n√≥s do caminho entre o n√≥ raiz 
+	 * e o n√≥ final da solu√ß√£o.
 	 */
 	private void setStack() {
 		stack = new Stack<Node>();
@@ -56,7 +56,7 @@ public class Solution {
 	}
 	
 	/**
-	 * @return O custo da solução (os pontos obtidos pelo agente).
+	 * @return O custo da solu√ß√£o (os pontos obtidos pelo agente).
 	 */
 	public int getCost() {
 		return finalNode.getPathCost();
@@ -70,7 +70,7 @@ public class Solution {
 		StringBuilder sb = new StringBuilder();
 		int totalPicked = finalNode.getState().getTotalPicked();
 		sb.append(getCost()).append(" pontos (" + totalPicked + " ouros)\n");
-		sb.append("Lista de ações:\n");
+		sb.append("Lista de a√ß√µes:\n");
 		if (stack.size() < 2) sb.append("[nenhuma]");
 		for (int i = stack.size() - 2, j = 1; i >= 0; i--, j++) {
 			Node node = stack.get(i);
