@@ -1,1 +1,20 @@
-Mina de Ouro - Simulação
+-------------------------------------------------
+MAC0425 Inteligência Artificial
+EP1 Mina de Ouro
+Data de entrega: 04/10/2013
+Aluno: Daniel Augusto Cortez (2960291)
+-------------------------------------------------
+
+Código: src/dacortez/minaDeOuro
+Relatório: relatorio.pdf
+Entradas: entrada1.txt, ..., entrada6.txt
+Código compilado: minaDeOuro.jar
+Modo de usar:
+
+	$ java -jar minaDeOuro.jar <arquivo_de_entrada> <tipo_de_agente>
+	
+	L: largura
+	P: profundidade
+	A: A*
+	U: uniforme
+	
